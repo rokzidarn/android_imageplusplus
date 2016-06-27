@@ -11,4 +11,6 @@
     <color name="btn_login_bg">#FFFFFF</color>
     <color name="btn_login">#000000</color>
     <color name="input_login_hint">#EAEAEA</color>
+
+    <color name="bg_welcome">#2E3237</color>
 </resources>

@@ -35,6 +35,8 @@ public class LoginActivity extends AppCompatActivity {
         //mPreferences = getSharedPreferences("CurrentUser", MODE_PRIVATE);
     }
 
+
+
     public void login(View button) {
         EditText userEmailField = (EditText) findViewById(R.id.userUsername);
         mUserUsername = userEmailField.getText().toString();
@@ -51,6 +53,14 @@ public class LoginActivity extends AppCompatActivity {
             loginTask.setMessageLoading("Logging in...");
             loginTask.execute(LOGIN_API_ENDPOINT_URL);
         }
+    }
+
+    public void bypass(View button){
+        Intent intent = new Intent(this, WelcomeActivity.class);
+        Bundle b = new Bundle();
+        b.putString("user", "rokzidarn");
+        intent.putExtras(b);
+        startActivity(intent);
     }
 
 //--------------------------------------------------------------------------------------------------

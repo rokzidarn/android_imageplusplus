@@ -41,15 +41,24 @@
             android:textColor="@color/input_login"
             android:textColorHint="@color/input_login_hint" />
 
-        <!-- Login Button -->
+        <Button
+        android:id="@+id/btnLogin"
+        android:onClick="login"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dip"
+        android:background="@color/btn_login_bg"
+        android:text="@string/btn_login"
+        android:textColor="@color/btn_login" />
 
         <Button
-            android:id="@+id/btnLogin"
+            android:id="@+id/btn"
+            android:onClick="bypass"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dip"
             android:background="@color/btn_login_bg"
-            android:text="@string/btn_login"
+            android:text="@string/btn_bypass"
             android:textColor="@color/btn_login" />
     </LinearLayout>
 
