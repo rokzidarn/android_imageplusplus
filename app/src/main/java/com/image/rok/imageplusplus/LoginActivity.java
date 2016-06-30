@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import org.apache.http.client.HttpResponseException;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpPost;
@@ -31,7 +30,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         //mPreferences = getSharedPreferences("CurrentUser", MODE_PRIVATE);
     }
 
@@ -44,13 +42,12 @@ public class LoginActivity extends AppCompatActivity {
         mUserPassword = userPasswordField.getText().toString();
 
         if (mUserUsername.length() == 0 || mUserPassword.length() == 0) {
-            // input fields are empty
-            Toast.makeText(this, "Please complete all the fields!",
+            Toast.makeText(this, "Please fill out all the fields!",
                     Toast.LENGTH_LONG).show();
             return;
         } else {
             LoginTask loginTask = new LoginTask(LoginActivity.this);
-            loginTask.setMessageLoading("Logging in...");
+            loginTask.setMessageLoading("Authenticating...");
             loginTask.execute(LOGIN_API_ENDPOINT_URL);
         }
     }
@@ -81,12 +78,8 @@ public class LoginActivity extends AppCompatActivity {
 
             try {
                 try {
-                    // setup the returned values in case
-                    // something goes wrong
                     json.put("success", false);
                     json.put("info", "Something went wrong. Retry!");
-                    // add the user email and password to
-                    // the params
                     userObj.put("username", mUserUsername);
                     userObj.put("password", mUserPassword);
                     holder.put("session", userObj);
@@ -121,15 +114,6 @@ public class LoginActivity extends AppCompatActivity {
         protected void onPostExecute(JSONObject json) {
             try {
                 if (json.getBoolean("success")) {
-                    // everything is ok
-                    //SharedPreferences.Editor editor = mPreferences.edit();
-                    // save the returned auth_token into
-                    // the SharedPreferences
-                    //editor.putString("AuthToken", json.getJSONObject("data").getString("auth_token"));
-                    //editor.commit();
-
-                    // launch the HomeActivity and close this one
-
                     String id = json.getJSONObject("data").getString("user_data");
                     Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class);
 
@@ -143,13 +127,10 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 Toast.makeText(context, json.getString("info"), Toast.LENGTH_LONG).show();
             } catch (Exception e) {
-                // something went wrong: show a Toast
-                // with the exception message
                 Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
             } finally {
                 super.onPostExecute(json);
             }
         }
     }
-//--------------------------------------------------------------------------------------------------
 }
