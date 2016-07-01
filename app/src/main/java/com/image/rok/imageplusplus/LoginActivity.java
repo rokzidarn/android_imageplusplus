@@ -54,14 +54,6 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    public void bypass(View button){
-        Intent intent = new Intent(this, WelcomeActivity.class);
-        Bundle b = new Bundle();
-        b.putString("user", "rokzidarn");
-        intent.putExtras(b);
-        startActivity(intent);
-    }
-
 //--------------------------------------------------------------------------------------------------
 
     private class LoginTask extends UrlJsonAsyncTask {
@@ -99,7 +91,7 @@ public class LoginActivity extends AppCompatActivity {
                 } catch (HttpResponseException e) {
                     e.printStackTrace();
                     Log.e("ClientProtocol", "" + e);
-                    json.put("info", "Email and/or password are invalid. Retry!");
+                    json.put("info", "Username and/or password are invalid. Retry!");
                 } catch (IOException e) {
                     e.printStackTrace();
                     Log.e("IO", "" + e);
