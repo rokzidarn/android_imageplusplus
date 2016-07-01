@@ -1,57 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/bg_welcome"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:padding="10dp" >
+    android:fitsSystemWindows="true"
+    android:background="@color/grey">
 
     <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp" >
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="56dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <TextView android:id="@+id/welcome_text"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="@string/welcome"
-            android:padding="10dp"
-            android:singleLine="true"
-            android:textColor="@color/white"
-            android:textSize="20dp" />
+            android:layout_marginBottom="8dp"
+            android:text="WELCOME"
+            android:gravity="center"
+            android:textSize="26dip"/>
 
-        <TextView
-            android:id="@+id/usernameText"
-            android:layout_width="wrap_content"
+        <TextView android:id="@+id/usernameText"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginBottom="10dp"
-            android:padding="10dp"
-            android:singleLine="true"
-            android:textSize="12dp"
-            android:textColor="@color/white"/>
+            android:layout_marginBottom="24dp"
+            android:gravity="center"
+            android:textSize="12dip"/>
 
-        <ImageView
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_centerInParent="true"
+        <ImageView android:src="@drawable/camera"
             android:id="@+id/imageView"
-            android:src="@drawable/camera"
-            android:scaleType="fitXY"
-            android:gravity="center" />
+            android:layout_width="wrap_content"
+            android:layout_height="72dp"
+            android:layout_marginBottom="24dp"
+            android:layout_gravity="center_horizontal" />
 
-        <Button
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+            <EditText android:id="@+id/nameImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:hint="Name"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <RadioButton android:id="@+id/radioPublic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Public"
+                android:onClick="onRadioButtonClicked"/>
+            <RadioButton android:id="@+id/radioPrivate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Private"
+                android:onClick="onRadioButtonClicked"/>
+        </RadioGroup>
+
+        <android.support.v7.widget.AppCompatButton
             android:id="@+id/btnCamera"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dip"
-            android:background="@color/bg_login"
-            android:text="@string/btn_camera"
-            android:textColor="@color/white" />
-    </LinearLayout>
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:padding="12dp"
+            android:text="Camera"
+            android:background="@color/turqoise"
+            android:textColor="@color/white"/>
 
-</LinearLayout>
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btnUpload"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:padding="12dp"
+            android:text="Upload"
+            android:background="@color/turqoise"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+</ScrollView>

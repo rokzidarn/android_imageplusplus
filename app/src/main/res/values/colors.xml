@@ -4,13 +4,9 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#40E0D0</color>
 
-    <color name="bg_login">#40E0D0</color>
+    <color name="turqoise">#40E0D0</color>
     <color name="white">#FFFFFF</color>
-    <color name="input_login">#000000</color>
+    <color name="black">#000000</color>
+    <color name="grey">#EAEAEA</color>
 
-    <color name="btn_login_bg">#FFFFFF</color>
-    <color name="btn_login">#000000</color>
-    <color name="input_login_hint">#EAEAEA</color>
-
-    <color name="bg_welcome">#2E3237</color>
 </resources>

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ImagePlusPlus</string>
+    <string name="app_name">I++</string>
     <string name="title_activity_welcom">Welcome</string>
     <string name="login">Login</string>
     <string name="action_refresh">Refresh</string>
