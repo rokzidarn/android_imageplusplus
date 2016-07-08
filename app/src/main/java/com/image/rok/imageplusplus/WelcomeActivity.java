@@ -3,7 +3,9 @@ package com.image.rok.imageplusplus;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.util.Log;
@@ -18,7 +20,6 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.savagelook.android.UrlJsonAsyncTask;
-
 import org.apache.http.client.HttpResponseException;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpPost;
@@ -27,7 +28,6 @@ import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
@@ -98,12 +98,21 @@ public class WelcomeActivity extends AppCompatActivity {
             }
             if (resultCode == RESULT_OK){
                 super.onActivityResult(requestCode, resultCode, data);
-
                 Bitmap bitmapImage = (Bitmap) data.getExtras().get("data");
+
+                Uri imageUri = data.getData();
+                Bitmap bitmap = null;
+                try {
+                    bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                    Log.e("URI to Bitmap problem!", "" + e);
+                }
                 imageView.setImageBitmap(bitmapImage);
 
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                bitmapImage.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                 byte[] imageBytes = baos.toByteArray();
                 mEncodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
                 Log.e("ENCODED IMAGE", mEncodedImage);
