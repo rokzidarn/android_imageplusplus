@@ -3,6 +3,8 @@ package com.image.rok.imageplusplus;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -47,11 +49,23 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, "Please fill out all the fields!",
                     Toast.LENGTH_LONG).show();
             return;
-        } else {
+        }
+        else if(!isOnline()){
+            Toast.makeText(this, "Please connect to the internet!",
+                    Toast.LENGTH_LONG).show();
+        }
+        else {
             LoginTask loginTask = new LoginTask(LoginActivity.this);
             loginTask.setMessageLoading("Authenticating...");
             loginTask.execute(LOGIN_API_ENDPOINT_URL);
         }
+    }
+
+    public boolean isOnline() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 
 //--------------------------------------------------------------------------------------------------
