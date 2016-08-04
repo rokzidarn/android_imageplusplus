@@ -89,6 +89,10 @@ public class WelcomeActivity extends AppCompatActivity {
                     Toast.LENGTH_LONG).show();
             return;
         }
+        else if(imageName.length() > 24){
+            Toast.makeText(this, "Image name field must not be longer than 32 characters!",
+                    Toast.LENGTH_LONG).show();
+        }
         else if(!isOnline()){
             Toast.makeText(this, "Please connect to the internet!",
                     Toast.LENGTH_LONG).show();
