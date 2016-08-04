@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -37,6 +39,7 @@ public class WelcomeActivity extends AppCompatActivity {
     Button btnCamera;
     ImageView imageView;
     RadioGroup rg;
+    Bitmap bitmap = null;
     private final static String UPLOAD_API_ENDPOINT_URL = "https://imageplusplus.herokuapp.com/api_upload";
 
     private String mEncodedImage;
@@ -81,15 +84,27 @@ public class WelcomeActivity extends AppCompatActivity {
             mImagePrivate = true;
         }
 
-        if (imageName.length() == 0 || value.length() == 0) {
+        if (imageName.length() == 0 || value.length() == 0 || bitmap == null) {
             Toast.makeText(this, "Please fill out all the fields!",
                     Toast.LENGTH_LONG).show();
             return;
-        } else {
+        }
+        else if(!isOnline()){
+            Toast.makeText(this, "Please connect to the internet!",
+                    Toast.LENGTH_LONG).show();
+        }
+        else {
             UploadTask uploadTask = new UploadTask(WelcomeActivity.this);
             uploadTask.setMessageLoading("Uploading...");
             uploadTask.execute(UPLOAD_API_ENDPOINT_URL);
         }
+    }
+
+    public boolean isOnline() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -102,7 +117,6 @@ public class WelcomeActivity extends AppCompatActivity {
                 Bitmap bitmapImage = (Bitmap) data.getExtras().get("data");
 
                 Uri imageUri = data.getData();
-                Bitmap bitmap = null;
                 try {
                     bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
                 }
@@ -112,15 +126,17 @@ public class WelcomeActivity extends AppCompatActivity {
                 }
                 imageView.setImageBitmap(bitmapImage);
 
-                if(bitmap.getWidth()>3264){
-                    bitmap = getResizedBitmap(bitmap, bitmap.getWidth()/2, bitmap.getHeight()/2);
-                }
+                if(bitmap != null) {
+                    if ((bitmap.getWidth() > 3264) || bitmap.getHeight() > 3264) {
+                        bitmap = getResizedBitmap(bitmap, bitmap.getWidth() / 3, bitmap.getHeight() / 3);
+                    }
 
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-                byte[] imageBytes = baos.toByteArray();
-                mEncodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
-                Log.e("ENCODED IMAGE", mEncodedImage);
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                    byte[] imageBytes = baos.toByteArray();
+                    mEncodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+                    Log.e("ENCODED IMAGE", mEncodedImage);
+                }
             }
         }
 

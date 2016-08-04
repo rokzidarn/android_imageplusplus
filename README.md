@@ -5,4 +5,3 @@
   http://sourcey.com/beautiful-android-login-and-signup-screens-with-material-design/
   http://stackoverflow.com/questions/4837715/how-to-resize-a-bitmap-in-android
   http://stackoverflow.com/questions/4238921/detect-whether-there-is-an-internet-connection-available-on-android
-  http://stackoverflow.com/questions/4837715/how-to-resize-a-bitmap-in-android
