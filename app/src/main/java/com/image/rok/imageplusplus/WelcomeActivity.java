@@ -128,13 +128,13 @@ public class WelcomeActivity extends AppCompatActivity {
                     e.printStackTrace();
                     Log.e("URI to Bitmap problem!", "" + e);
                 }
-                imageView.setImageBitmap(bitmapImage);
+                //imageView.setImageBitmap(bitmap);
 
                 if(bitmap != null) {
                     if ((bitmap.getWidth() > 3264) || bitmap.getHeight() > 3264) {
                         bitmap = getResizedBitmap(bitmap, bitmap.getWidth() / 3, bitmap.getHeight() / 3);
                     }
-
+                    imageView.setImageBitmap(bitmap);
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
                     bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                     byte[] imageBytes = baos.toByteArray();

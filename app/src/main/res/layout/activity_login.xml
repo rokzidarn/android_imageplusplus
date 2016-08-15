@@ -5,11 +5,11 @@
     android:background="@color/grey"
     android:gravity="center"
     android:orientation="vertical"
-    android:padding="10dp" >
+    android:padding="5dp" >
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="500dp"
         android:layout_gravity="center"
         android:orientation="vertical"
         android:paddingLeft="20dp"
@@ -18,15 +18,15 @@
         <TextView android:id="@+id/app_text"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
+            android:layout_marginBottom="20dp"
             android:text="Image++"
             android:gravity="center"
             android:textSize="26dip"/>
 
         <ImageView android:src="@drawable/launcher"
             android:layout_width="wrap_content"
-            android:layout_height="72dp"
-            android:layout_marginBottom="12dp"
+            android:layout_height="96dp"
+            android:layout_marginBottom="20dp"
             android:layout_gravity="center_horizontal" />
 
         <EditText
